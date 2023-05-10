@@ -2,6 +2,13 @@
 
 Automatically generate commit messages using ChatGPT
 
+# Demo
+
+
+https://github.com/KuaqSon/flash-commit/assets/35871959/5d38cfb4-b0e2-411d-8232-b687b3c35856
+
+
+
 # How to install
 
 > Requires: Python3.7 or later installed
