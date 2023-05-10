@@ -112,22 +112,13 @@ def get_staged_files():
     console.print("Generating commit message for:", style="bold green")
     console.print(diff)
     os.chdir(wd)
-    return diff.split("\n")
-
-
-def get_staged_file_names_status():
-    wd = os.getcwd()
-    git_dir = subprocess.getoutput("git rev-parse --show-toplevel")
-    os.chdir(git_dir)
-    diff = subprocess.getoutput("git diff --staged --name-status")
-    os.chdir(wd)
-    return diff[:MAX_ALLOW_TOKENS]
-
-
-def get_diff(staged_files: list[str]):
+    staged_files = diff.split("\n")
     lock_files = []
     non_lock_files = []
     for file_name in staged_files:
+        if file_name == "" or file_name.strip() == "":
+            continue
+
         if ".lock" in file_name or "-lock." in file_name:
             lock_files.append(file_name)
         else:
@@ -141,11 +132,24 @@ def get_diff(staged_files: list[str]):
         for file_name in lock_files:
             console.print("- {f}".format(f=file_name), style="bold yellow")
 
+    return non_lock_files
+
+
+def get_staged_file_names_status():
+    wd = os.getcwd()
+    git_dir = subprocess.getoutput("git rev-parse --show-toplevel")
+    os.chdir(git_dir)
+    diff = subprocess.getoutput("git diff --staged --name-status")
+    os.chdir(wd)
+    return diff[:MAX_ALLOW_TOKENS]
+
+
+def get_diff(staged_files: list[str]):
     wd = os.getcwd()
     git_dir = subprocess.getoutput("git rev-parse --show-toplevel")
     os.chdir(git_dir)
     diff = subprocess.getoutput(
-        "git diff --staged -- {files}".format(files=" ".join(non_lock_files))
+        "git diff --staged -- {files}".format(files=" ".join(staged_files))
     )
     os.chdir(wd)
     return diff
