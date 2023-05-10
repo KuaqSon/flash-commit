@@ -227,7 +227,7 @@ def do_commit():
     # END
 
 
-def typer_run(openai_key: Annotated[Optional[str], typer.Argument()] = None):
+def typer_run(openai_key: Annotated[Optional[str], typer.Option()] = None):
     try:
         if openai_key is not None:
             save_config({"openai_key": openai_key})
