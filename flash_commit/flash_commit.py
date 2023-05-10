@@ -1,10 +1,8 @@
 from ast import Dict
-from time import sleep
 import os
 from typing import Optional
 from typing_extensions import Annotated
 import typer
-from rich import print
 from pathlib import Path
 from os.path import exists, join
 from rich.console import Console
@@ -229,13 +227,21 @@ def do_commit():
     # END
 
 
-def main(openai_key: Annotated[Optional[str], typer.Argument(default=None)] = None):
-    if openai_key is not None:
-        save_config({"openai_key": openai_key})
-        console.print("\nOPEN AI KEY SAVED!", style="bold green")
-    else:
-        do_commit()
+def typer_run(openai_key: Annotated[Optional[str], typer.Argument()] = None):
+    try:
+        if openai_key is not None:
+            save_config({"openai_key": openai_key})
+            console.print("\nOPEN AI KEY SAVED!", style="bold green")
+        else:
+            do_commit()
+    except Exception as e:
+        console.print("\nERROR!", style="bold red")
+        console.print(str(e), style="red")
+
+
+def main():
+    typer.run(typer_run)
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    main()
