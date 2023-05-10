@@ -212,14 +212,14 @@ def do_commit():
     console.print("\nCommit message generated!", style="bold green")
     console.print(commit_msg)
     console.print("")
-    accept = typer.confirm("Are you want to commit with this message?", default=True)
+    accept = typer.confirm("Would you like to commit to this message?", default=True)
     if not accept:
         return
 
     subprocess.run(["git", "commit", "-m", commit_msg])
 
     console.print("")
-    run_push = typer.confirm("Are you want to push to remote?", default=True)
+    run_push = typer.confirm("Do you want to push to the remote?", default=True)
     if not run_push:
         return
 
