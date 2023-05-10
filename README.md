@@ -8,7 +8,7 @@ Automatically generate commit messages using ChatGPT
 
 1. Download the latest version of [release](https://github.com/KuaqSon/flash-commit/releases).
 2. Extract the latest version build
-3. run the following command
+3. Run the following command
 
 ```
 python3 -m pip install <path to downloaded release>/flash_commit-<version>-py3-none-any.whl
