@@ -24,7 +24,7 @@ python3 -m pip install <path to downloaded release>/flash_commit-<version>-py3-n
 For example:
 
 ```
-python3 -m pip install ls ~/Downloads/flash_commit-0.0.1/flash_commit-0.0.1-py3-none-any.whl
+python3 -m pip install ~/Downloads/flash_commit-0.0.1/flash_commit-0.0.1-py3-none-any.whl
 ```
 
 # Usage
